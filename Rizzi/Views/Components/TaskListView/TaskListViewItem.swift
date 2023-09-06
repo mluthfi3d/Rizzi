@@ -18,7 +18,6 @@ struct TaskListViewItem: View {
                         .font(.system(size: 14))
                 }
                 Text(task.taskDescription ?? "")
-                    .fontWeight(.medium)
                     .font(.system(size: 18))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -28,8 +27,10 @@ struct TaskListViewItem: View {
                 Spacer()
             }
         }
+        .padding(16)
+        .background(Color.white)
+        .cornerRadius(8)
         .frame(alignment: .top)
-        .padding([.horizontal], 16)
     }
 }
 //

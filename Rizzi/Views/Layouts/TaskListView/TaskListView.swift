@@ -21,22 +21,23 @@ struct TaskListView: View {
                 if(!taskViewModel.groupedTasks.isEmpty){
                     ScrollView {
                         VStack(spacing: 16){
-                            VStack(spacing: 16){
-                                ForEach($taskViewModel.groupedTasks, id: \.self) { $groupedTask in
-                                    Text(groupedTask.first?.taskDeadline?.formatDateOnly() ?? "")
-                                    ForEach($groupedTask, id: \.self) { $task in
-                                        TaskListViewItem(task: $task)
-                                    }
-                                }
-                            }.padding([.vertical], 8)
+                            ForEach($taskViewModel.groupedTasks, id: \.self) { $grouppedTask in
+                                TaskListViewSection(grouppedTask: $grouppedTask)
+                                    .padding([.horizontal], 16)
+                                    .padding([.vertical], 8)
+                            }
                         }
+                        .padding([.vertical], 16)
                     }
                 } else {
                     Text("All tasks are done, rest easy")
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.colorBackground)
+            .scrollContentBackground(.hidden)
             
-            .navigationTitle("Rizzi")
+            .navigationTitle("To Do")
             .navigationBarTitleDisplayMode(.large).toolbar{
                 ToolbarItem(placement: .primaryAction){
                     Menu(content: {
