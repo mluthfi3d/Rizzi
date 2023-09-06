@@ -12,6 +12,7 @@ class CategoryViewModel: ObservableObject {
     
     private let viewContext = PersistenceController.shared.viewContext
     @Published var categories: [Category] = []
+    let colors = ["Red", "Green", "Blue", "Purple"]
     
     init(){
         createNoCategory()
@@ -24,6 +25,7 @@ class CategoryViewModel: ObservableObject {
         } catch {
             print("DEBUG: Error while Fetching")
         }
+        print(categories)
     }
     
     func createNoCategory(){
@@ -38,6 +40,7 @@ class CategoryViewModel: ObservableObject {
         } catch {
             print("DEBUG: Error while Creating No Category")
         }
+        fetchCategories()
         
     }
     

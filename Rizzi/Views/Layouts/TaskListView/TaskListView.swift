@@ -14,6 +14,7 @@ struct TaskListView: View {
     @StateObject var categoryViewModel = CategoryViewModel()
     
     @State var isNewTask = false
+    @State var isNewCategory = false
     
     var body: some View {
         NavigationStack(path: $route.path){
@@ -47,7 +48,7 @@ struct TaskListView: View {
                             Label("New Task", systemImage: "checklist")
                         }
                         Button(action: {
-                            
+                            isNewCategory.toggle()
                         }) {
                             Label("New Category", systemImage: "tag")
                         }
@@ -60,6 +61,10 @@ struct TaskListView: View {
             
             .sheet(isPresented: $isNewTask){
                 NewTaskView(taskViewModel: taskViewModel, categoryViewModel: categoryViewModel)
+            }
+            
+            .sheet(isPresented: $isNewCategory){
+                NewCategoryView(categoryViewModel: categoryViewModel)
             }
             
             .navigationDestination(for: String.self){item in

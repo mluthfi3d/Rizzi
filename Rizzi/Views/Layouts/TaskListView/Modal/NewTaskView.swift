@@ -19,11 +19,8 @@ struct NewTaskView: View {
     
     @State private var taskDescription = ""
     @State private var taskDeadline = Date()
-    @State private var taskCategory = "No Category"
+    @State private var taskCategory: Category?
     @State private var taskReminderStatus = false
-    
-    //    let periods = ["One-Time", "Weekly", "Monthly"]
-    //    let colors = ["Red", "Green", "Blue", "Purple"]
     
     var body: some View {
         NavigationStack {
@@ -32,16 +29,11 @@ struct NewTaskView: View {
                 DatePicker("Due Date", selection: $taskDeadline, displayedComponents: [.date, .hourAndMinute])
                 Toggle("Remind Me", isOn: $taskReminderStatus)
                 Picker("Category", selection: $taskCategory){
-                    if(!categoryViewModel.categories.isEmpty){
-                        ForEach(categoryViewModel.categories, id: \.self){category in
-                            Text(category.categoryName ?? "No Category").tag(Optional(category.categoryId))
-                        }
-                    } else {
-                        Text("No Category").tag("")
+                    ForEach(categoryViewModel.categories, id: \.self){category in
+                        Text(category.categoryName ?? "").tag(Optional(category))
                     }
                 }.pickerStyle(.menu)
             }
-//            .background(Color("BGColor"))
             
             .navigationTitle("New Task")
             .navigationBarTitleDisplayMode(.inline)
@@ -53,12 +45,11 @@ struct NewTaskView: View {
                 }
                 ToolbarItem(placement: .primaryAction){
                     Button("Done"){
-                        taskViewModel.insertToDatabase(taskDescription: taskDescription, taskDeadline: taskDeadline, taskReminderStatus: taskReminderStatus, categoryName: taskCategory)
+                        taskViewModel.insertToDatabase(taskDescription: taskDescription, taskDeadline: taskDeadline, taskReminderStatus: taskReminderStatus, category: taskCategory ?? nil)
                         dismiss()
                     }.disabled((taskDescription.isEmpty))
                 }
             }
-            //            .toolbarBackground(Color("ItemColor"),for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             
         }
