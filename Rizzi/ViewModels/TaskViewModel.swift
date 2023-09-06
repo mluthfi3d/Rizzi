@@ -29,18 +29,16 @@ class TaskViewModel: ObservableObject {
         self.fetchTasksGroupByDay(tasks: tasks)
     }
     
-    func fetchTasksFilterByName(name: String){
-        print(name)
+    func fetchTasksFilterByTaskDescription(description: String){
         var tasks: [Task] = []
         let request = NSFetchRequest<Task>(entityName: "Task")
-        request.predicate = NSPredicate(format: "taskDescription contains[cd] %@", name)
+        request.predicate = NSPredicate(format: "taskDescription contains[cd] %@", description)
         
         do {
             let results = try viewContext.fetch(request)
             if !results.isEmpty {
                 tasks = results
             }
-            print(tasks)
         } catch {
             print("DEBUG: Error while Getting Category")
         }

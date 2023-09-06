@@ -24,8 +24,8 @@ struct TaskListView: View {
                 if(!taskViewModel.groupedTasks.isEmpty){
                     ScrollView {
                         VStack(spacing: 16){
-                            ForEach($taskViewModel.groupedTasks, id: \.self) { $grouppedTask in
-                                TaskListViewSection(grouppedTask: $grouppedTask)
+                            ForEach($taskViewModel.groupedTasks, id: \.self) { $groupedTask in
+                                TaskListViewSection(groupedTask: $groupedTask)
                                     .padding([.horizontal], 16)
                                     .padding([.vertical], 8)
                             }
@@ -74,7 +74,7 @@ struct TaskListView: View {
             
             .task (id: searchText){
                 if searchText != "" {
-                    taskViewModel.fetchTasksFilterByName(name: searchText)
+                    taskViewModel.fetchTasksFilterByTaskDescription(description: searchText)
                 } else {
                     taskViewModel.fetchTasks()
                 }

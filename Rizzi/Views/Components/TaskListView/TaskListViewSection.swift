@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct TaskListViewSection: View {
-    @Binding var grouppedTask: [Task]
+    @Binding var groupedTask: [Task]
     var body: some View {
         VStack(spacing: 0){
             VStack{
-                if(Date.now.formatDateOnly() == grouppedTask.first?.taskDeadline?.formatDateOnly() ?? "") {
+                if(Date.now.formatDateOnly() == groupedTask.first?.taskDeadline?.formatDateOnly() ?? "") {
                     Text("Today")
                 } else {
-                    Text(grouppedTask.first?.taskDeadline?.formatDateOnly() ?? "")
+                    Text(groupedTask.first?.taskDeadline?.formatDateOnly() ?? "")
                 }
             }.frame(maxWidth: .infinity, alignment: .leading)
                 .padding([.bottom], 8)
             VStack(spacing: 8){
-                ForEach($grouppedTask, id: \.self) { $task in
+                ForEach($groupedTask, id: \.self) { $task in
                     TaskListViewItem(task: $task)
                 }
             }
