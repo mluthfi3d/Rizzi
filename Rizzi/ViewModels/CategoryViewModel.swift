@@ -25,7 +25,6 @@ class CategoryViewModel: ObservableObject {
         } catch {
             print("DEBUG: Error while Fetching")
         }
-        print(categories)
     }
     
     func createNoCategory(){

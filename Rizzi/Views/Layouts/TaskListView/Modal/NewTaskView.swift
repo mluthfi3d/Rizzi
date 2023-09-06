@@ -45,12 +45,17 @@ struct NewTaskView: View {
                 }
                 ToolbarItem(placement: .primaryAction){
                     Button("Done"){
-                        taskViewModel.insertToDatabase(taskDescription: taskDescription, taskDeadline: taskDeadline, taskReminderStatus: taskReminderStatus, category: taskCategory ?? nil)
+                        taskViewModel.insertToDatabase(
+                            taskDescription: taskDescription,
+                            taskDeadline: taskDeadline,
+                            taskReminderStatus: taskReminderStatus,
+                            category: taskCategory ?? nil)
                         dismiss()
                     }.disabled((taskDescription.isEmpty))
                 }
             }
             .toolbarBackground(.visible, for: .navigationBar)
+            
             
         }
     }

@@ -16,6 +16,8 @@ struct TaskListView: View {
     @State var isNewTask = false
     @State var isNewCategory = false
     
+    @State var searchText = ""
+    
     var body: some View {
         NavigationStack(path: $route.path){
             VStack{
@@ -37,6 +39,9 @@ struct TaskListView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.colorBackground)
             .scrollContentBackground(.hidden)
+            
+            
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always)) 
             
             .navigationTitle("To Do")
             .navigationBarTitleDisplayMode(.large).toolbar{
@@ -65,6 +70,14 @@ struct TaskListView: View {
             
             .sheet(isPresented: $isNewCategory){
                 NewCategoryView(categoryViewModel: categoryViewModel)
+            }
+            
+            .task (id: searchText){
+                if searchText != "" {
+                    taskViewModel.fetchTasksFilterByName(name: searchText)
+                } else {
+                    taskViewModel.fetchTasks()
+                }
             }
             
             .navigationDestination(for: String.self){item in
