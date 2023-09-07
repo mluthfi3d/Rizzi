@@ -59,7 +59,7 @@ struct TaskListViewItem: View {
                     .frame(maxWidth: .infinity)
                 })
                 .toggleStyle(ListCheckBoxStyle(taskColor: categoryViewModel.getColor(color: task.category?.categoryColor ?? "")))
-                .onChange(of: isOn){value in
+                .onChange(of: isOn){ value in
                     taskViewModel.changeStatus(task: task, value: value)
                 }
             }
@@ -79,7 +79,6 @@ struct TaskListViewItem: View {
             if(task.category?.categoryName != "No Category"){
                 isCategorized = true
             }
-            
             isOn = task.taskStatus
         }
         

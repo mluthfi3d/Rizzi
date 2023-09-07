@@ -82,9 +82,9 @@ struct TaskListView: View {
                 NewCategoryView(categoryViewModel: categoryViewModel)
             }
             
-            .task (id: searchText){
-                taskViewModel.fetchTasks(description: searchText)
-            }
+//            .task (id: searchText){
+//                taskViewModel.fetchTasks(description: searchText, taskStatus: false)
+//            }
             
             .navigationDestination(for: String.self){item in
                 switch (item){

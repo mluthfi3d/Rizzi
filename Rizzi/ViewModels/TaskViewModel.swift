@@ -21,11 +21,19 @@ class TaskViewModel: ObservableObject {
     func fetchTasks(description: String? = "", category: Category? = nil, taskStatus: Bool? = false){
         var tasks: [Task] = []
         let request = NSFetchRequest<Task>(entityName: "Task")
-        if description != "" {
-            request.predicate = NSPredicate(format: "taskDescription contains[cd] %@", description!)
-        }
-        if category != nil {
-            request.predicate = NSPredicate(format: "category = %@", category!)
+        if description != "" || category != nil {
+            if description != "" && category != nil {
+                request.predicate = NSPredicate(format: "taskDescription contains[cd] %@ and category == %@ and taskStatus == %@", description!, category!, taskStatus!)
+            } else {
+                if description != "" {
+                    request.predicate = NSPredicate(format: "taskDescription contains[cd] %@ and taskStatus == %@", description!, taskStatus!)
+                }
+                if category != nil {
+                    request.predicate = NSPredicate(format: "category == %@ and taskStatus == %@", category!, taskStatus!)
+                }
+            }
+        } else {
+            request.predicate = NSPredicate(format: "taskStatus == %@", NSNumber(value: taskStatus!))
         }
         
         do {
