@@ -33,7 +33,7 @@ struct TaskListViewItem: View {
                                 .font(.system(size: 16))
                                 .foregroundColor(Color.black100)
                             
-                            if (task.taskDeadline!.isPassed()) {
+                            if (task.taskDeadline!.isPassed() && !task.taskStatus) {
                                 VStack{
                                     Text("Overdue")
                                         .font(.system(size: 12))
@@ -59,6 +59,9 @@ struct TaskListViewItem: View {
                     .frame(maxWidth: .infinity)
                 })
                 .toggleStyle(ListCheckBoxStyle(taskColor: categoryViewModel.getColor(color: task.category?.categoryColor ?? "")))
+                .onChange(of: isOn){value in
+                    taskViewModel.changeStatus(task: task, value: value)
+                }
             }
             .padding([.vertical, .leading], 16)
             .padding([.trailing], 12)
@@ -76,11 +79,10 @@ struct TaskListViewItem: View {
             if(task.category?.categoryName != "No Category"){
                 isCategorized = true
             }
+            
+            isOn = task.taskStatus
         }
         
-        .task (id: isOn){
-            taskViewModel
-        }
     }
 }
 

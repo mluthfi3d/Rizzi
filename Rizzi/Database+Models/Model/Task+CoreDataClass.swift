@@ -2,7 +2,7 @@
 //  Task+CoreDataClass.swift
 //  Rizzi
 //
-//  Created by Muhammad Luthfi on 05/09/23.
+//  Created by Muhammad Luthfi on 07/09/23.
 //
 //
 

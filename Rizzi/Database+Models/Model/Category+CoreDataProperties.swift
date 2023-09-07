@@ -2,12 +2,13 @@
 //  Category+CoreDataProperties.swift
 //  Rizzi
 //
-//  Created by Muhammad Luthfi on 05/09/23.
+//  Created by Muhammad Luthfi on 07/09/23.
 //
 //
 
 import Foundation
 import CoreData
+
 
 extension Category {
 
@@ -15,9 +16,9 @@ extension Category {
         return NSFetchRequest<Category>(entityName: "Category")
     }
 
+    @NSManaged public var categoryColor: String?
     @NSManaged public var categoryId: UUID?
     @NSManaged public var categoryName: String?
-    @NSManaged public var categoryColor: String?
     @NSManaged public var task: NSSet?
 
 }

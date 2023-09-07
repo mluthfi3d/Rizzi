@@ -14,12 +14,11 @@ class TaskViewModel: ObservableObject {
     private let viewContext = PersistenceController.shared.viewContext
     @Published var groupedTasks: [[Task]] = []
     
-    
     init(){
         self.fetchTasks()
     }
     
-    func fetchTasks(description: String? = "", category: Category? = nil){
+    func fetchTasks(description: String? = "", category: Category? = nil, taskStatus: Bool? = false){
         var tasks: [Task] = []
         let request = NSFetchRequest<Task>(entityName: "Task")
         if description != "" {
@@ -59,7 +58,8 @@ class TaskViewModel: ObservableObject {
         newTask.taskDescription = taskDescription
         newTask.taskDeadline = taskDeadline
         newTask.taskReminderStatus = taskReminderStatus
-        newTask.taskStatusId = "0"
+        newTask.taskStatus = false
+        
         if category == nil {
             let request = NSFetchRequest<Category>(entityName: "Category")
             request.predicate = NSPredicate(format: "categoryName == %@", "No Category")
@@ -81,8 +81,11 @@ class TaskViewModel: ObservableObject {
         self.fetchTasks()
     }
     
-    func changeStatus(){
+    func changeStatus(task: Task, value: Bool){
+        task.taskStatus = value
+        save()
         
+        self.fetchTasks()
     }
     
     func save(){

@@ -20,9 +20,7 @@ struct ListCheckBoxStyle: ToggleStyle {
             configuration.label
         }
         .onTapGesture {
-            withAnimation(.spring()){
-                configuration.isOn.toggle()
-            }
+            configuration.isOn.toggle()
         }
     }
 }
