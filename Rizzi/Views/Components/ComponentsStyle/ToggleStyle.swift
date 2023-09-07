@@ -17,10 +17,10 @@ struct ListCheckBoxStyle: ToggleStyle {
                 .resizable()
                 .frame(width: 24, height: 24)
                 .foregroundColor(Color.black60)
+                .onTapGesture {
+                    configuration.isOn.toggle()
+                }
             configuration.label
-        }
-        .onTapGesture {
-            configuration.isOn.toggle()
         }
     }
 }

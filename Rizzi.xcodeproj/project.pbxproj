@@ -28,6 +28,8 @@
 		27CCFFD12AA981DD00FF38A3 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCFFCD2AA981DD00FF38A3 /* Task+CoreDataProperties.swift */; };
 		27CCFFD22AA981DD00FF38A3 /* Category+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCFFCE2AA981DD00FF38A3 /* Category+CoreDataClass.swift */; };
 		27CCFFD32AA981DD00FF38A3 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCFFCF2AA981DD00FF38A3 /* Category+CoreDataProperties.swift */; };
+		27CCFFD52AA9928E00FF38A3 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCFFD42AA9928E00FF38A3 /* FilterView.swift */; };
+		27CCFFD72AA9A81500FF38A3 /* DetailTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCFFD62AA9A81500FF38A3 /* DetailTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		27CCFFCD2AA981DD00FF38A3 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		27CCFFCE2AA981DD00FF38A3 /* Category+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataClass.swift"; sourceTree = "<group>"; };
 		27CCFFCF2AA981DD00FF38A3 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		27CCFFD42AA9928E00FF38A3 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		27CCFFD62AA9A81500FF38A3 /* DetailTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +189,8 @@
 			children = (
 				2732145A2AA75FE0009E67F6 /* NewTaskView.swift */,
 				273214622AA8A07B009E67F6 /* NewCategoryView.swift */,
+				27CCFFD42AA9928E00FF38A3 /* FilterView.swift */,
+				27CCFFD62AA9A81500FF38A3 /* DetailTaskView.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -292,6 +298,7 @@
 				27CCFFC32AA9652D00FF38A3 /* ToggleStyle.swift in Sources */,
 				273214602AA8808C009E67F6 /* TaskListViewSection.swift in Sources */,
 				27CCFFD22AA981DD00FF38A3 /* Category+CoreDataClass.swift in Sources */,
+				27CCFFD52AA9928E00FF38A3 /* FilterView.swift in Sources */,
 				2732144C2AA6FD9A009E67F6 /* CategoryViewModel.swift in Sources */,
 				273214212AA6CAC6009E67F6 /* ContentView.swift in Sources */,
 				2732142B2AA6CAC7009E67F6 /* Rizzi.xcdatamodeld in Sources */,
@@ -303,6 +310,7 @@
 				273214522AA6FEC9009E67F6 /* TaskListView.swift in Sources */,
 				273214542AA6FED5009E67F6 /* TaskListViewItem.swift in Sources */,
 				273214632AA8A07B009E67F6 /* NewCategoryView.swift in Sources */,
+				27CCFFD72AA9A81500FF38A3 /* DetailTaskView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

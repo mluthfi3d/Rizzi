@@ -15,7 +15,13 @@ struct TaskListView: View {
     
     @State var isNewTask = false
     @State var isNewCategory = false
+    @State var isFiltering = false
+    @State var isFiltered = false
     
+    @State var isShowingDetails = false
+    
+    @State var selectedCategory = Category()
+    @State var selectedTask = Task()
     @State var searchText = ""
     
     var body: some View {
@@ -25,7 +31,7 @@ struct TaskListView: View {
                     ScrollView {
                         VStack(spacing: 16){
                             ForEach($taskViewModel.groupedTasks, id: \.self) { $groupedTask in
-                                TaskListViewSection(groupedTask: $groupedTask, categoryViewModel: categoryViewModel, taskViewModel: taskViewModel)
+                                TaskListViewSection(groupedTask: $groupedTask, selectedTask: $selectedTask, isShowingDetails: $isShowingDetails, categoryViewModel: categoryViewModel, taskViewModel: taskViewModel)
                                     .padding([.horizontal], 16)
                                     .padding([.vertical], 8)
                             }
@@ -33,7 +39,11 @@ struct TaskListView: View {
                         .padding([.vertical], 16)
                     }
                 } else {
-                    Text("All tasks are done, rest easy")
+                    if searchText != "" {
+                        Text("No results for " + searchText)
+                    } else {
+                        Text("No tasks found, try to create one")
+                    }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -41,10 +51,11 @@ struct TaskListView: View {
             .scrollContentBackground(.hidden)
             
             
-            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always)) 
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             
             .navigationTitle("To Do")
-            .navigationBarTitleDisplayMode(.large).toolbar{
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar{
                 ToolbarItem(placement: .primaryAction){
                     Menu(content: {
                         Button(action: {
@@ -58,12 +69,12 @@ struct TaskListView: View {
                             Label("New Category", systemImage: "tag")
                         }
                         Button(action: {
-//                            isNewCategory.toggle()
+                            isFiltering.toggle()
                         }) {
                             Label("Filter", systemImage: "slider.horizontal.3")
                         }
                         Button(action: {
-//                            isNewCategory.toggle()
+                            //                            isNewCategory.toggle()
                         }) {
                             Label("Archived", systemImage: "archivebox")
                         }
@@ -73,6 +84,19 @@ struct TaskListView: View {
                     })
                 }
             }
+            .onChange (of: selectedCategory){ value in
+                if value.categoryName == "No Category" {
+                    taskViewModel.fetchTasks(description: searchText)
+                } else {
+                    taskViewModel.fetchTasks(description: searchText, category: value)
+                }
+                if selectedCategory.categoryName != "No Category" {
+                    isFiltered = true
+                } else {
+                    isFiltered = false
+                }
+            }
+            
             
             .sheet(isPresented: $isNewTask){
                 NewTaskView(taskViewModel: taskViewModel, categoryViewModel: categoryViewModel)
@@ -82,9 +106,21 @@ struct TaskListView: View {
                 NewCategoryView(categoryViewModel: categoryViewModel)
             }
             
-//            .task (id: searchText){
-//                taskViewModel.fetchTasks(description: searchText, taskStatus: false)
-//            }
+            .sheet(isPresented: $isFiltering){
+                FilterView(categoryViewModel: categoryViewModel, selectedCategory: $selectedCategory)
+            }
+            
+            .sheet(isPresented: $isShowingDetails){
+                DetailTaskView(taskViewModel: taskViewModel, categoryViewModel: categoryViewModel, task: $selectedTask)
+            }
+            
+            .task (id: searchText){
+                if isFiltered {
+                    taskViewModel.fetchTasks(description: searchText, category: selectedCategory)
+                } else {
+                    taskViewModel.fetchTasks(description: searchText)
+                }
+            }
             
             .navigationDestination(for: String.self){item in
                 switch (item){

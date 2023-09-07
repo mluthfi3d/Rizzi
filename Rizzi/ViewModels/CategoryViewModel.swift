@@ -44,7 +44,7 @@ class CategoryViewModel: ObservableObject {
         } catch {
             print("DEBUG: Error while Creating No Category")
         }
-        fetchCategories()
+        self.fetchCategories()
         
     }
     

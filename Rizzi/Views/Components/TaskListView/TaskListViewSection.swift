@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TaskListViewSection: View {
     @Binding var groupedTask: [Task]
+    @Binding var selectedTask: Task
+    @Binding var isShowingDetails: Bool
     @ObservedObject var categoryViewModel: CategoryViewModel
     @ObservedObject var taskViewModel: TaskViewModel
     
@@ -29,7 +31,7 @@ struct TaskListViewSection: View {
             
             VStack(spacing: 8){
                 ForEach($groupedTask, id: \.self) { $task in
-                    TaskListViewItem(task: $task, categoryViewModel: categoryViewModel, taskViewModel: taskViewModel)
+                    TaskListViewItem(task: $task, selectedTask: $selectedTask, isShowingDetails: $isShowingDetails, categoryViewModel: categoryViewModel, taskViewModel: taskViewModel)
                 }
             }
         }
@@ -40,6 +42,6 @@ struct TaskListViewSection_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.shared.container.viewContext
         let tempTask = Task(context: context)
-        TaskListViewSection(groupedTask: .constant([tempTask]), categoryViewModel: CategoryViewModel(), taskViewModel: TaskViewModel())
+        TaskListViewSection(groupedTask: .constant([tempTask]), selectedTask: .constant(Task()), isShowingDetails: .constant(false), categoryViewModel: CategoryViewModel(), taskViewModel: TaskViewModel())
     }
 }

@@ -23,13 +23,13 @@ class TaskViewModel: ObservableObject {
         let request = NSFetchRequest<Task>(entityName: "Task")
         if description != "" || category != nil {
             if description != "" && category != nil {
-                request.predicate = NSPredicate(format: "taskDescription contains[cd] %@ and category == %@ and taskStatus == %@", description!, category!, taskStatus!)
+                request.predicate = NSPredicate(format: "taskDescription contains[cd] %@ and category == %@ and taskStatus == %@", description!, category!, NSNumber(value: taskStatus!))
             } else {
                 if description != "" {
-                    request.predicate = NSPredicate(format: "taskDescription contains[cd] %@ and taskStatus == %@", description!, taskStatus!)
+                    request.predicate = NSPredicate(format: "taskDescription contains[cd] %@ and taskStatus == %@", description!, NSNumber(value: taskStatus!))
                 }
                 if category != nil {
-                    request.predicate = NSPredicate(format: "category == %@ and taskStatus == %@", category!, taskStatus!)
+                    request.predicate = NSPredicate(format: "category == %@ and taskStatus == %@", category!, NSNumber(value: taskStatus!))
                 }
             }
         } else {
@@ -85,14 +85,13 @@ class TaskViewModel: ObservableObject {
         }
         
         save()
-        
         self.fetchTasks()
     }
     
     func changeStatus(task: Task, value: Bool){
         task.taskStatus = value
-        save()
         
+        save()
         self.fetchTasks()
     }
     

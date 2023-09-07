@@ -12,11 +12,6 @@ struct NewTaskView: View {
     @ObservedObject var taskViewModel: TaskViewModel
     @ObservedObject var categoryViewModel: CategoryViewModel
     
-    init(taskViewModel: TaskViewModel, categoryViewModel: CategoryViewModel){
-        self.taskViewModel = taskViewModel
-        self.categoryViewModel = categoryViewModel
-    }
-    
     @State private var taskDescription = ""
     @State private var taskDeadline = Date()
     @State private var taskCategory: Category?
@@ -26,7 +21,10 @@ struct NewTaskView: View {
         NavigationStack {
             Form {
                 TextField("Task", text: $taskDescription)
-                DatePicker("Due Date", selection: $taskDeadline, displayedComponents: [.date, .hourAndMinute])
+                DatePicker("Due Date",
+                           selection: $taskDeadline,
+                           in: Date().addingTimeInterval(TimeInterval(30.0*60.0))...,
+                           displayedComponents: [.date, .hourAndMinute])
                 Toggle("Remind Me", isOn: $taskReminderStatus)
                 Picker("Category", selection: $taskCategory){
                     ForEach(categoryViewModel.categories, id: \.self){category in

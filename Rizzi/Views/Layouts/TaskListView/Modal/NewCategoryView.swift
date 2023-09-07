@@ -10,14 +10,9 @@ import SwiftUI
 struct NewCategoryView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var categoryViewModel: CategoryViewModel
-    
-    init(categoryViewModel: CategoryViewModel){
-        self.categoryViewModel = categoryViewModel
-    }
-    
+
     @State private var categoryName = ""
     @State private var categoryColor = "Blue"
-    
     
     var body: some View {
         NavigationStack {
