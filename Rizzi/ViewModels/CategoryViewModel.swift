@@ -7,12 +7,17 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 class CategoryViewModel: ObservableObject {
     
     private let viewContext = PersistenceController.shared.viewContext
     @Published var categories: [Category] = []
-    let colors = ["Red", "Green", "Blue", "Purple"]
+    let colors = ["Red": Color.listRed,
+                  "Yellow": Color.listYellow,
+                  "Green": Color.listGreen,
+                  "Blue": Color.listBlue,
+                  "Orange": Color.listOrange]
     
     init(){
         createNoCategory()
@@ -59,6 +64,10 @@ class CategoryViewModel: ObservableObject {
         } catch {
             print("DEBUG: Error while saving")
         }
+    }
+    
+    func getColor(color: String) -> Color {
+        return colors[color] ?? Color.listGeneral
     }
     
 }

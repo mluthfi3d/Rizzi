@@ -27,6 +27,7 @@
 		2732145E2AA85A36009E67F6 /* DateExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2732145D2AA85A36009E67F6 /* DateExtenstions.swift */; };
 		273214602AA8808C009E67F6 /* TaskListViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2732145F2AA8808C009E67F6 /* TaskListViewSection.swift */; };
 		273214632AA8A07B009E67F6 /* NewCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273214622AA8A07B009E67F6 /* NewCategoryView.swift */; };
+		27CCFFC32AA9652D00FF38A3 /* ToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCFFC22AA9652D00FF38A3 /* ToggleStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		2732145D2AA85A36009E67F6 /* DateExtenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtenstions.swift; sourceTree = "<group>"; };
 		2732145F2AA8808C009E67F6 /* TaskListViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewSection.swift; sourceTree = "<group>"; };
 		273214622AA8A07B009E67F6 /* NewCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryView.swift; sourceTree = "<group>"; };
+		27CCFFC22AA9652D00FF38A3 /* ToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 		273214452AA6DC7E009E67F6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				27CCFFC12AA9650700FF38A3 /* ComponentsStyle */,
 				273214612AA8808F009E67F6 /* TaskListView */,
 			);
 			path = Components;
@@ -201,6 +204,14 @@
 				2732145F2AA8808C009E67F6 /* TaskListViewSection.swift */,
 			);
 			path = TaskListView;
+			sourceTree = "<group>";
+		};
+		27CCFFC12AA9650700FF38A3 /* ComponentsStyle */ = {
+			isa = PBXGroup;
+			children = (
+				27CCFFC22AA9652D00FF38A3 /* ToggleStyle.swift */,
+			);
+			path = ComponentsStyle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +289,7 @@
 				2732145E2AA85A36009E67F6 /* DateExtenstions.swift in Sources */,
 				273214282AA6CAC7009E67F6 /* Persistence.swift in Sources */,
 				273214572AA6FF52009E67F6 /* Colors.swift in Sources */,
+				27CCFFC32AA9652D00FF38A3 /* ToggleStyle.swift in Sources */,
 				273214602AA8808C009E67F6 /* TaskListViewSection.swift in Sources */,
 				2732144C2AA6FD9A009E67F6 /* CategoryViewModel.swift in Sources */,
 				2732143D2AA6DB37009E67F6 /* Task+CoreDataClass.swift in Sources */,

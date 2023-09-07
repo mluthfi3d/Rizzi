@@ -7,11 +7,13 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 class TaskViewModel: ObservableObject {
     
     private let viewContext = PersistenceController.shared.viewContext
     @Published var groupedTasks: [[Task]] = []
+    
     
     init(){
         self.fetchTasks()

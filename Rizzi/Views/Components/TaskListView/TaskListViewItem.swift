@@ -9,33 +9,65 @@ import SwiftUI
 
 struct TaskListViewItem: View {
     @Binding var task: Task
+    @ObservedObject var categoryViewModel: CategoryViewModel
+    @State var isCategorized = false
+    @State var isOn = false
     
     var body: some View {
-        HStack{
-            VStack(alignment: .leading){
-                if(task.category?.categoryName != "No Category"){
-                    Text(task.category?.categoryName ?? "")
-                        .font(.system(size: 14))
-                }
-                Text(task.taskDescription ?? "")
-                    .font(.system(size: 18))
+        HStack(spacing: 0){
+            Rectangle()
+                .fill(isCategorized ? categoryViewModel.getColor(color: task.category?.categoryColor ?? "") : Color.listGeneral)
+                .frame(width: 4)
+            
+            HStack{
+                Toggle(isOn: $isOn, label: {
+                    HStack{
+                        VStack(alignment: .leading, spacing: 0){
+                            if(isCategorized){
+                                VStack {
+                                    Text(task.category?.categoryName ?? "")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(categoryViewModel.getColor(color: task.category?.categoryColor ?? ""))
+                                }
+                                .padding([.bottom], 4)
+                            }
+                            
+                            Text(task.taskDescription ?? "")
+                                .font(.system(size: 16))
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        VStack{
+                            Text(task.taskDeadline?.formatTimeOnly() ?? "")
+                                .font(.system(size: 14))
+                                .foregroundColor(Color.black60)
+                            Spacer()
+                        }
+                    }
+                    .background(Color.white)
+                    .frame(maxWidth: .infinity)
+                })
+                .toggleStyle(ListCheckBoxStyle(taskColor: isCategorized ? categoryViewModel.getColor(color: task.category?.categoryColor ?? "") : Color.listGeneral))
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            VStack{
-                Text(task.taskDeadline?.formatTimeOnly() ?? "")
-                    .font(.system(size: 14))
-                Spacer()
-            }
+            .padding([.vertical], 16)
+            .padding([.leading], 12)
+            .padding([.trailing], 16)
         }
-        .padding(16)
         .background(Color.white)
         .cornerRadius(8)
         .frame(alignment: .top)
+        
+        .onAppear {
+            if(task.category?.categoryName != "No Category"){
+                isCategorized = true
+            }
+        }
     }
 }
-//
-//struct TaskListViewItem_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TaskListViewItem(task: .constant(Task(context: <#T##NSManagedObjectContext#>)))
-//    }
-//}
+
+struct TaskListViewItem_Previews: PreviewProvider {
+    static var previews: some View {
+        let context = PersistenceController.shared.container.viewContext
+        let tempTask = Task(context: context)
+        TaskListViewItem(task: .constant(tempTask), categoryViewModel: CategoryViewModel())
+    }
+}

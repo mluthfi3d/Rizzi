@@ -25,7 +25,7 @@ struct TaskListView: View {
                     ScrollView {
                         VStack(spacing: 16){
                             ForEach($taskViewModel.groupedTasks, id: \.self) { $groupedTask in
-                                TaskListViewSection(groupedTask: $groupedTask)
+                                TaskListViewSection(groupedTask: $groupedTask, categoryViewModel: categoryViewModel)
                                     .padding([.horizontal], 16)
                                     .padding([.vertical], 8)
                             }

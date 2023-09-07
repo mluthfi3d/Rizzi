@@ -24,7 +24,7 @@ struct NewCategoryView: View {
             Form {
                 TextField("Category Name", text: $categoryName)
                 Picker("Category Color", selection: $categoryColor){
-                    ForEach(categoryViewModel.colors, id: \.self){color in
+                    ForEach(Array(categoryViewModel.colors.keys), id: \.self){color in
                         Text(color).tag(Optional(color))
                     }
                 }.pickerStyle(.menu)
