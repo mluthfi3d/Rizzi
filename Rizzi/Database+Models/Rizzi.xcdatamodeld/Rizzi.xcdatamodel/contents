@@ -11,7 +11,7 @@
         <attribute name="taskDescription" optional="YES" attributeType="String"/>
         <attribute name="taskId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="taskReminderStatus" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="taskStatusId" optional="YES" attributeType="String"/>
+        <attribute name="taskStatus" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="task" inverseEntity="Category"/>
     </entity>
 </model>

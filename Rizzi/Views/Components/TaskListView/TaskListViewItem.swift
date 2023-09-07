@@ -10,15 +10,12 @@ import SwiftUI
 struct TaskListViewItem: View {
     @Binding var task: Task
     @ObservedObject var categoryViewModel: CategoryViewModel
+    @ObservedObject var taskViewModel: TaskViewModel
     @State var isCategorized = false
     @State var isOn = false
     
     var body: some View {
         HStack(spacing: 0){
-            Rectangle()
-                .fill(isCategorized ? categoryViewModel.getColor(color: task.category?.categoryColor ?? "") : Color.listGeneral)
-                .frame(width: 4)
-            
             HStack{
                 Toggle(isOn: $isOn, label: {
                     HStack{
@@ -26,31 +23,34 @@ struct TaskListViewItem: View {
                             if(isCategorized){
                                 VStack {
                                     Text(task.category?.categoryName ?? "")
-                                        .font(.system(size: 14))
+                                        .font(.system(size: 12))
+                                        .textCase(.uppercase)
                                         .foregroundColor(categoryViewModel.getColor(color: task.category?.categoryColor ?? ""))
                                 }
                             }
                             
                             Text(task.taskDescription ?? "")
                                 .font(.system(size: 16))
+                                .foregroundColor(Color.black100)
                             
                             if (task.taskDeadline!.isPassed()) {
                                 VStack{
                                     Text("Overdue")
-                                        .font(.system(size: 14))
+                                        .font(.system(size: 12))
                                         .fontWeight(.medium)
-                                        .foregroundColor(Color.black0)
+                                        .foregroundColor(Color.colorDanger)
+                                        .textCase(.uppercase)
                                 }
                                 .padding(4)
                                 .padding([.horizontal], 4)
-                                .background(Color.red)
+                                .background(Color.colorSoftDanger)
                                 .cornerRadius(4)
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         VStack{
                             Text(task.taskDeadline?.formatTimeOnly() ?? "")
-                                .font(.system(size: 14))
+                                .font(.system(size: 12))
                                 .foregroundColor(Color.black60)
                             Spacer()
                         }
@@ -58,11 +58,15 @@ struct TaskListViewItem: View {
                     .background(Color.white)
                     .frame(maxWidth: .infinity)
                 })
-                .toggleStyle(ListCheckBoxStyle(taskColor: isCategorized ? categoryViewModel.getColor(color: task.category?.categoryColor ?? "") : Color.listGeneral))
+                .toggleStyle(ListCheckBoxStyle(taskColor: categoryViewModel.getColor(color: task.category?.categoryColor ?? "")))
             }
-            .padding([.vertical], 16)
-            .padding([.leading], 12)
-            .padding([.trailing], 16)
+            .padding([.vertical, .leading], 16)
+            .padding([.trailing], 12)
+            
+            Rectangle()
+                .fill(isCategorized ? categoryViewModel.getColor(color: task.category?.categoryColor ?? "") : Color.listGeneral)
+                .frame(width: 4)
+            
         }
         .background(Color.white)
         .cornerRadius(8)
@@ -73,6 +77,10 @@ struct TaskListViewItem: View {
                 isCategorized = true
             }
         }
+        
+        .task (id: isOn){
+            taskViewModel
+        }
     }
 }
 
@@ -80,6 +88,6 @@ struct TaskListViewItem_Previews: PreviewProvider {
     static var previews: some View {
         let context = PersistenceController.shared.container.viewContext
         let tempTask = Task(context: context)
-        TaskListViewItem(task: .constant(tempTask), categoryViewModel: CategoryViewModel())
+        TaskListViewItem(task: .constant(tempTask), categoryViewModel: CategoryViewModel(), taskViewModel: TaskViewModel())
     }
 }

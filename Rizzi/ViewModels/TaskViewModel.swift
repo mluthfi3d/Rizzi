@@ -19,22 +19,15 @@ class TaskViewModel: ObservableObject {
         self.fetchTasks()
     }
     
-    func fetchTasks(){
+    func fetchTasks(description: String? = "", category: Category? = nil){
         var tasks: [Task] = []
         let request = NSFetchRequest<Task>(entityName: "Task")
-        
-        do {
-            tasks = try viewContext.fetch(request)
-        } catch {
-            print("DEBUG: Error while Fetching")
+        if description != "" {
+            request.predicate = NSPredicate(format: "taskDescription contains[cd] %@", description!)
         }
-        self.fetchTasksGroupByDay(tasks: tasks)
-    }
-    
-    func fetchTasksFilterByTaskDescription(description: String){
-        var tasks: [Task] = []
-        let request = NSFetchRequest<Task>(entityName: "Task")
-        request.predicate = NSPredicate(format: "taskDescription contains[cd] %@", description)
+        if category != nil {
+            request.predicate = NSPredicate(format: "category = %@", category!)
+        }
         
         do {
             let results = try viewContext.fetch(request)
@@ -44,10 +37,11 @@ class TaskViewModel: ObservableObject {
         } catch {
             print("DEBUG: Error while Getting Category")
         }
-        self.fetchTasksGroupByDay(tasks: tasks)
+        self.groupTasks(tasks: tasks)
     }
     
-    func fetchTasksGroupByDay(tasks: [Task]){
+    
+    func groupTasks(tasks: [Task]){
         var newGroupedTasks: [[Task]] = []
         let newTasks = Dictionary(grouping: tasks, by: {$0.taskDeadline!.formatDateOnly()})
         let sortedKeys = newTasks.keys.sorted()
@@ -85,6 +79,10 @@ class TaskViewModel: ObservableObject {
         save()
         
         self.fetchTasks()
+    }
+    
+    func changeStatus(){
+        
     }
     
     func save(){

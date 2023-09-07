@@ -12,11 +12,11 @@ struct ListCheckBoxStyle: ToggleStyle {
     let taskColor: Color
     
     func makeBody(configuration: Configuration) -> some View {
-        HStack {
+        HStack(spacing: 12) {
             Image(systemName: configuration.isOn ? "checkmark.circle.fill" : "circle")
                 .resizable()
                 .frame(width: 24, height: 24)
-                .foregroundColor(self.taskColor)
+                .foregroundColor(Color.black60)
             configuration.label
         }
         .onTapGesture {

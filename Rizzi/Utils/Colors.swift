@@ -10,6 +10,7 @@ import SwiftUI
 
 extension Color {
     
+    // BLACK
     static var black0: Color {
         return Color("Black0")
     }
@@ -22,12 +23,26 @@ extension Color {
         return Color("Black100")
     }
     
-    
+    // GENERAL COLOR
     static var colorBackground: Color  {
         return Color("ColorBackground")
     }
     
+    static var colorPrimary: Color {
+        return Color("ColorPrimary")
+    }
     
+    // STATE COLOR
+    static var colorDanger: Color {
+        return Color("ColorDanger")
+    }
+    
+    static var colorSoftDanger: Color {
+        return Color("ColorSoftDanger")
+    }
+    
+    
+    // COLOR OF TASK
     static var listRed: Color {
         return Color("ListRed")
     }
