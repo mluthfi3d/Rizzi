@@ -32,9 +32,8 @@ struct FilterView: View {
                 }
                 ToolbarItem(placement: .primaryAction){
                     Button("Apply"){
-//                        categoryViewModel.insertToDatabase(categoryName: categoryName, categoryColor: categoryColor)
                         dismiss()
-                    }.disabled((selectedCategory == nil))
+                    }.disabled((selectedCategory.categoryName == "No Category"))
                 }
             }
             .toolbarBackground(.visible, for: .navigationBar)

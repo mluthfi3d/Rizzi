@@ -13,7 +13,7 @@ struct NewTaskView: View {
     @ObservedObject var categoryViewModel: CategoryViewModel
     
     @State private var taskDescription = ""
-    @State private var taskDeadline = Date()
+    @State private var taskDeadline = Date().addingTimeInterval(TimeInterval(5.0*60.0))
     @State private var taskCategory: Category?
     @State private var taskReminderStatus = false
     
@@ -23,7 +23,7 @@ struct NewTaskView: View {
                 TextField("Task", text: $taskDescription)
                 DatePicker("Due Date",
                            selection: $taskDeadline,
-                           in: Date().addingTimeInterval(TimeInterval(30.0*60.0))...,
+                           in: Date().addingTimeInterval(TimeInterval(5.0*60.0))...,
                            displayedComponents: [.date, .hourAndMinute])
                 Toggle("Remind Me", isOn: $taskReminderStatus)
                 Picker("Category", selection: $taskCategory){

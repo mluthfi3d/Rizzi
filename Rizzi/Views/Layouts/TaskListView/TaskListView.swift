@@ -12,12 +12,12 @@ struct TaskListView: View {
     @StateObject var route = Route()
     @StateObject var taskViewModel = TaskViewModel()
     @StateObject var categoryViewModel = CategoryViewModel()
+    @StateObject var notificationManager = NotificationManager()
     
     @State var isNewTask = false
     @State var isNewCategory = false
     @State var isFiltering = false
     @State var isFiltered = false
-    
     @State var isShowingDetails = false
     
     @State var selectedCategory = Category()
@@ -120,6 +120,10 @@ struct TaskListView: View {
                 } else {
                     taskViewModel.fetchTasks(description: searchText)
                 }
+            }
+            
+            .task {
+                taskViewModel.fetchTasks(description: searchText)
             }
             
             .navigationDestination(for: String.self){item in

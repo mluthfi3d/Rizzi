@@ -84,6 +84,15 @@ struct TaskListViewItem: View {
                 .frame(alignment: .top)
             }
         }
+        .gesture(
+            DragGesture().onChanged { value in
+               if value.translation.width > 0 {
+                  print("Scroll right")
+               } else {
+                  print("Scroll left")
+               }
+            }
+         )
         
         .onAppear {
             if(task.category?.categoryName != "No Category"){

@@ -85,6 +85,9 @@ class TaskViewModel: ObservableObject {
         }
         
         save()
+        if taskReminderStatus {
+            NotificationManager.shared.setUpNotification(task: newTask)
+        }
         self.fetchTasks()
     }
     

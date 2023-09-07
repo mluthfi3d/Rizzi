@@ -18,7 +18,9 @@ struct ListCheckBoxStyle: ToggleStyle {
                 .frame(width: 24, height: 24)
                 .foregroundColor(Color.black60)
                 .onTapGesture {
-                    configuration.isOn.toggle()
+                    withAnimation(.spring()){
+                        configuration.isOn.toggle()
+                    }
                 }
             configuration.label
         }

@@ -30,6 +30,7 @@
 		27CCFFD32AA981DD00FF38A3 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCFFCF2AA981DD00FF38A3 /* Category+CoreDataProperties.swift */; };
 		27CCFFD52AA9928E00FF38A3 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCFFD42AA9928E00FF38A3 /* FilterView.swift */; };
 		27CCFFD72AA9A81500FF38A3 /* DetailTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCFFD62AA9A81500FF38A3 /* DetailTaskView.swift */; };
+		27CCFFD92AA9B9AC00FF38A3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CCFFD82AA9B9AC00FF38A3 /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		27CCFFCF2AA981DD00FF38A3 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		27CCFFD42AA9928E00FF38A3 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		27CCFFD62AA9A81500FF38A3 /* DetailTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskView.swift; sourceTree = "<group>"; };
+		27CCFFD82AA9B9AC00FF38A3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 			children = (
 				2732144B2AA6FD9A009E67F6 /* CategoryViewModel.swift */,
 				2732144D2AA6FDA3009E67F6 /* TaskViewModel.swift */,
+				27CCFFD82AA9B9AC00FF38A3 /* NotificationManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				273214492AA6FD35009E67F6 /* Route.swift in Sources */,
 				2732145E2AA85A36009E67F6 /* DateExtenstions.swift in Sources */,
 				273214282AA6CAC7009E67F6 /* Persistence.swift in Sources */,
+				27CCFFD92AA9B9AC00FF38A3 /* NotificationManager.swift in Sources */,
 				273214572AA6FF52009E67F6 /* Colors.swift in Sources */,
 				27CCFFC32AA9652D00FF38A3 /* ToggleStyle.swift in Sources */,
 				273214602AA8808C009E67F6 /* TaskListViewSection.swift in Sources */,
