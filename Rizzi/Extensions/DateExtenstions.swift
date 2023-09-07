@@ -26,4 +26,9 @@ extension Date {
         formattedTime = formatter.string(from: self)
         return formattedTime
     }
+    
+    func isPassed() -> Bool {
+        let now = Date()
+        return now > self
+    }
 }

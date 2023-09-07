@@ -22,18 +22,30 @@ struct TaskListViewItem: View {
             HStack{
                 Toggle(isOn: $isOn, label: {
                     HStack{
-                        VStack(alignment: .leading, spacing: 0){
+                        VStack(alignment: .leading, spacing: 4){
                             if(isCategorized){
                                 VStack {
                                     Text(task.category?.categoryName ?? "")
                                         .font(.system(size: 14))
                                         .foregroundColor(categoryViewModel.getColor(color: task.category?.categoryColor ?? ""))
                                 }
-                                .padding([.bottom], 4)
                             }
                             
                             Text(task.taskDescription ?? "")
                                 .font(.system(size: 16))
+                            
+                            if (task.taskDeadline!.isPassed()) {
+                                VStack{
+                                    Text("Overdue")
+                                        .font(.system(size: 14))
+                                        .fontWeight(.medium)
+                                        .foregroundColor(Color.black0)
+                                }
+                                .padding(4)
+                                .padding([.horizontal], 4)
+                                .background(Color.red)
+                                .cornerRadius(4)
+                            }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         VStack{

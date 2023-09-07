@@ -57,6 +57,16 @@ struct TaskListView: View {
                         }) {
                             Label("New Category", systemImage: "tag")
                         }
+                        Button(action: {
+//                            isNewCategory.toggle()
+                        }) {
+                            Label("Filter", systemImage: "slider.horizontal.3")
+                        }
+                        Button(action: {
+//                            isNewCategory.toggle()
+                        }) {
+                            Label("Archived", systemImage: "archivebox")
+                        }
                     }, label: {
                         Image(systemName: "ellipsis")
                             .imageScale(.large)
