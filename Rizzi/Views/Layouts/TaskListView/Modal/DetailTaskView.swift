@@ -28,9 +28,11 @@ struct DetailTaskView: View {
                     }.pickerStyle(.menu)
                 }
                 
-                Button("Delete") {
-                    
-                }
+                if (!task.taskStatus) {
+                    Button("Delete") {
+                        taskViewModel.deleteTask(task: task)
+                        dismiss()
+                    }}
             }
             
             .navigationTitle("New Task")

@@ -25,51 +25,100 @@ struct TaskListViewItem: View {
             } label: {
                 HStack(spacing: 0){
                     HStack{
-                        Toggle(isOn: $isOn, label: {
-                            HStack{
-                                VStack(alignment: .leading, spacing: 4){
-                                    if(isCategorized){
-                                        VStack {
-                                            Text(task.category?.categoryName ?? "")
-                                                .font(.system(size: 12))
-                                                .textCase(.uppercase)
-                                                .foregroundColor(categoryViewModel.getColor(color: task.category?.categoryColor ?? ""))
+                        if task.taskStatus {
+                            Toggle(isOn: $isOn, label: {
+                                HStack{
+                                    VStack(alignment: .leading, spacing: 4){
+                                        if(isCategorized){
+                                            VStack {
+                                                Text(task.category?.categoryName ?? "")
+                                                    .font(.system(size: 12))
+                                                    .textCase(.uppercase)
+                                                    .foregroundColor(categoryViewModel.getColor(color: task.category?.categoryColor ?? ""))
+                                            }
+                                        }
+                                        
+                                        Text(task.taskDescription ?? "")
+                                            .font(.system(size: 16))
+                                            .foregroundColor(Color.black100)
+                                        
+                                        if (task.taskDeadline!.isPassed() && !task.taskStatus) {
+                                            VStack{
+                                                Text("Overdue")
+                                                    .font(.system(size: 12))
+                                                    .fontWeight(.medium)
+                                                    .foregroundColor(Color.colorDanger)
+                                                    .textCase(.uppercase)
+                                            }
+                                            .padding(4)
+                                            .padding([.horizontal], 4)
+                                            .background(Color.colorSoftDanger)
+                                            .cornerRadius(4)
                                         }
                                     }
-                                    
-                                    Text(task.taskDescription ?? "")
-                                        .font(.system(size: 16))
-                                        .foregroundColor(Color.black100)
-                                    
-                                    if (task.taskDeadline!.isPassed() && !task.taskStatus) {
-                                        VStack{
-                                            Text("Overdue")
-                                                .font(.system(size: 12))
-                                                .fontWeight(.medium)
-                                                .foregroundColor(Color.colorDanger)
-                                                .textCase(.uppercase)
-                                        }
-                                        .padding(4)
-                                        .padding([.horizontal], 4)
-                                        .background(Color.colorSoftDanger)
-                                        .cornerRadius(4)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    VStack{
+                                        Text(task.taskDeadline?.formatTimeOnly() ?? "")
+                                            .font(.system(size: 12))
+                                            .foregroundColor(Color.black60)
+                                        Spacer()
                                     }
                                 }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                VStack{
-                                    Text(task.taskDeadline?.formatTimeOnly() ?? "")
-                                        .font(.system(size: 12))
-                                        .foregroundColor(Color.black60)
-                                    Spacer()
-                                }
+                                .background(Color.white)
+                                .frame(maxWidth: .infinity)
+                            })
+                            .toggleStyle(ArchivedStyle())
+                            .onChange(of: isOn){ value in
+                                taskViewModel.changeStatus(task: task, value: value)
                             }
-                            .background(Color.white)
-                            .frame(maxWidth: .infinity)
-                        })
-                        .toggleStyle(ListCheckBoxStyle(taskColor: categoryViewModel.getColor(color: task.category?.categoryColor ?? "")))
-                        .onChange(of: isOn){ value in
-                            taskViewModel.changeStatus(task: task, value: value)
+                        } else {
+                            Toggle(isOn: $isOn, label: {
+                                HStack{
+                                    VStack(alignment: .leading, spacing: 4){
+                                        if(isCategorized){
+                                            VStack {
+                                                Text(task.category?.categoryName ?? "")
+                                                    .font(.system(size: 12))
+                                                    .textCase(.uppercase)
+                                                    .foregroundColor(categoryViewModel.getColor(color: task.category?.categoryColor ?? ""))
+                                            }
+                                        }
+                                        
+                                        Text(task.taskDescription ?? "")
+                                            .font(.system(size: 16))
+                                            .foregroundColor(Color.black100)
+                                        
+                                        if (task.taskDeadline?.isPassed() ?? false && !task.taskStatus) {
+                                            VStack{
+                                                Text("Overdue")
+                                                    .font(.system(size: 12))
+                                                    .fontWeight(.medium)
+                                                    .foregroundColor(Color.colorDanger)
+                                                    .textCase(.uppercase)
+                                            }
+                                            .padding(4)
+                                            .padding([.horizontal], 4)
+                                            .background(Color.colorSoftDanger)
+                                            .cornerRadius(4)
+                                        }
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    VStack{
+                                        Text(task.taskDeadline?.formatTimeOnly() ?? "")
+                                            .font(.system(size: 12))
+                                            .foregroundColor(Color.black60)
+                                        Spacer()
+                                    }
+                                }
+                                .background(Color.white)
+                                .frame(maxWidth: .infinity)
+                            })
+                            .toggleStyle(ListCheckBoxStyle(taskColor: categoryViewModel.getColor(color: task.category?.categoryColor ?? "")))
+                            .onChange(of: isOn){ value in
+                                taskViewModel.changeStatus(task: task, value: value)
+                            }
                         }
+                        
                     }
                     .padding([.vertical, .leading], 16)
                     .padding([.trailing], 12)

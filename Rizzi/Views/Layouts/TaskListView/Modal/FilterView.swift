@@ -33,7 +33,7 @@ struct FilterView: View {
                 ToolbarItem(placement: .primaryAction){
                     Button("Apply"){
                         dismiss()
-                    }.disabled((selectedCategory.categoryName == "No Category"))
+                    }
                 }
             }
             .toolbarBackground(.visible, for: .navigationBar)

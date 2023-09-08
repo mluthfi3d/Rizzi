@@ -27,6 +27,15 @@ struct ListCheckBoxStyle: ToggleStyle {
     }
 }
 
+
+struct ArchivedStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(spacing: 12) {
+            configuration.label
+        }
+    }
+}
+
 //struct ToggleStyle_Previews: PreviewProvider {
 //    static var previews: some View {
 //        ToggleStyle()

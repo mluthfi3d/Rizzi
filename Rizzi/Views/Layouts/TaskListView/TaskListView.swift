@@ -50,7 +50,6 @@ struct TaskListView: View {
             .background(Color.colorBackground)
             .scrollContentBackground(.hidden)
             
-            
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             
             .navigationTitle("To Do")
@@ -74,7 +73,7 @@ struct TaskListView: View {
                             Label("Filter", systemImage: "slider.horizontal.3")
                         }
                         Button(action: {
-                            //                            isNewCategory.toggle()
+                            route.path.append("archived")
                         }) {
                             Label("Archived", systemImage: "archivebox")
                         }
@@ -130,8 +129,8 @@ struct TaskListView: View {
                 switch (item){
                 case "taskList":
                     TaskListView()
-                case "taskDetail":
-                    ContentView()
+                case "archived":
+                    ArchivedView(taskViewModel: taskViewModel, categoryViewModel: categoryViewModel)
                 default:
                     ContentView()
                 }

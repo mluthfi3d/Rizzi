@@ -13,9 +13,11 @@ class TaskViewModel: ObservableObject {
     
     private let viewContext = PersistenceController.shared.viewContext
     @Published var groupedTasks: [[Task]] = []
+    @Published var groupedArchivedTasks: [[Task]] = []
     
     init(){
         self.fetchTasks()
+        self.fetchTasks(taskStatus: true)
     }
     
     func fetchTasks(description: String? = "", category: Category? = nil, taskStatus: Bool? = false){
@@ -44,11 +46,11 @@ class TaskViewModel: ObservableObject {
         } catch {
             print("DEBUG: Error while Getting Category")
         }
-        self.groupTasks(tasks: tasks)
+        self.groupTasks(tasks: tasks, taskStatus: taskStatus)
     }
     
     
-    func groupTasks(tasks: [Task]){
+    func groupTasks(tasks: [Task], taskStatus: Bool? = false){
         var newGroupedTasks: [[Task]] = []
         let newTasks = Dictionary(grouping: tasks, by: {$0.taskDeadline!.formatDateOnly()})
         let sortedKeys = newTasks.keys.sorted()
@@ -56,7 +58,11 @@ class TaskViewModel: ObservableObject {
         for key in sortedKeys {
             newGroupedTasks.append(newTasks[key]!.sorted(by: {$0.taskDeadline!.formatTimeOnly() < $1.taskDeadline!.formatTimeOnly()}))
         }
-        groupedTasks = newGroupedTasks
+        if !(taskStatus ?? false) {
+            groupedTasks = newGroupedTasks
+        } else {
+            groupedArchivedTasks = newGroupedTasks
+        }
     }
     
     
@@ -96,6 +102,7 @@ class TaskViewModel: ObservableObject {
         
         save()
         self.fetchTasks()
+        self.fetchTasks(taskStatus: true)
     }
     
     func save(){
@@ -104,5 +111,13 @@ class TaskViewModel: ObservableObject {
         } catch {
             print("DEBUG: Error while saving")
         }
+    }
+    
+    
+    func deleteTask(task: Task){
+        viewContext.delete(task)
+        save()
+        self.fetchTasks()
+        self.fetchTasks(taskStatus: true)
     }
 }
